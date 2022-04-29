@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'authentication.apps.AuthenticationConfig', 
+    'plancon',
     
 ]
 
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'plancon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,10 +120,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
 
+#STATIC_URL: specifies what to append when you call `{% static %}` as template tag.
+STATIC_URL = '/static/'
+
+
+#STATICFILES_DIRS: it tells Django where to look for static files while serving a request. 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type
