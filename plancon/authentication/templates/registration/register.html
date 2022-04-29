@@ -1,4 +1,5 @@
-{% comment %} original no css {% endcomment %}
+{% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +7,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
+    <link rel="stylesheet" href="{% static 'authentication/css/SignUp.css' %}">
 </head>
 <body>
-    <h1>registration page!</h1>
-    <form action="post" action='{% url 'register' %}' method="post">
+    <img class="logoimg" src="{% static 'authentication/img/logo.png' %}">
+    <div class="logoname">PLANCONF</div>
+   
+   <div class="container">
+    <img class="cer" src="{% static 'authentication/img/cerr.png' %}">
+   </div>
+     <img class="line2" src="{% static 'authentication/img/line22.png' %}">
+     <img class="line1" src="{% static 'authentication/img/line1.png' %}">
+     <img class="line3" src="{% static 'authentication/img/line3.png' %}">         
+   <div class="text">Create an account</div>
+
+
+    <form action={% url 'plancon:register' %} method="post" class="form">
         {% csrf_token %}
 
         {% if form.errors %}
-        <p>there are errors</p>
+        {{ form.errors }}
         {% endif %}
+        <div class="form__group">
+            <div class="group"></div>
+            {% render_field form.username class="form__input" placeholder=" "%}
+            <label for="username" class="form__label">UserName</label>
+        </div>
 
-        {{ form.as_p }}
-        <br>
-
-        <input type='submit' value='register'>
-        <br>
-        <br>
-        <p>Already Have an accont?<a href='/accounts/login/'>login</a></p>
+        <div class="group"></div>
+        <div class="form__group">
+            {% render_field form.first_name class="form__input" placeholder=" "%}
+            <label for="first_name" class="form__label">First Name</label>
+        </div>
+        <div class="group"></div>
+        <div class="form__group">
+            {% render_field form.last_name class="form__input" placeholder=" "%}
+            <label for="last_name" class="form__label">Last Name</label>
+        </div>
+        <div class="group"></div>
+        <div class="form__group">
+            {% render_field form.email class="form__input" placeholder=" " %}
+            <label for="email" class="form__label">Email</label>
+        </div>
+        <div class="group"></div>
+        <div class="form__group">
+            {% render_field form.password1 class="form__input" placeholder=" " %}
+            <label for="password" class="form__label">Password</label>
+        </div>
+        <div class="group"></div>
+        <div class="form__group">
+            {% render_field form.password2 class="form__input" placeholder=" " %}
+            <label for="password2" class="form__label">Confirm Password</label>
+        </div>
+        
+        <p class="signup"><a href='/login' >You Already Have An account?</a></p>
+        
+            <button class="form__button" type='submit'>
+                <div class="signuptext">sign up</div>
+            </button>
        
     </form>
+    <script>
+        function error_username() {
+            alert("A user with that username already exists.");
+        }
+        function error_username() {
+            alert("Enter a valid email address.");
+        }
+        function error_password() {
+            alert("The two password fields didn’t match.");
+        }
+    </script>
 </body>
 </html>

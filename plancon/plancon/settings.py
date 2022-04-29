@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication',
-    'authentication.apps.AuthenticationConfig', 
+    'authentication.apps.AuthenticationConfig',
     'plancon',
-    
+    'widget_tweaks',
+ 
 ]
 
 MIDDLEWARE = [
@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -84,6 +85,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
@@ -124,10 +126,12 @@ USE_TZ = True
 #STATIC_URL: specifies what to append when you call `{% static %}` as template tag.
 STATIC_URL = '/static/'
 
+MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
+MEDIA_URL= "/media/"
 
 #STATICFILES_DIRS: it tells Django where to look for static files while serving a request. 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / "static/",
 ]
 
 # Default primary key field type

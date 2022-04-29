@@ -1,0 +1,204 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+    <!-- Style.css -->
+    <link rel="stylesheet" href="{% static 'authentication/css/addcon.css' %} ">
+    <!--datetimepicker-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-mainbg">
+      <!-- Logo -->
+      <a class="navbar-brand navbar-logo" href="#"><img src="{% static 'authentication/img/Logoweb.png' %}"></a>
+      <!-- Collapse Button -->
+      
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+              <!-- For Styling -->
+              
+     
+        <li><a href="{% url 'plancon:dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'plancon:addcon' %}">Add Conference</a></li>
+        <li><a href="myconfe.html">My Conferences</a></li>
+        <li><a href="myart.html">My articles</a></li>
+        <li><a href="myrev.html">My reviews</a></li>
+        <li><a href="pro.html">profile</a></li>
+      </ul>
+    </div>
+    </nav>
+    
+
+<div class="thisbody">		
+<div id="container">
+
+    <div class="highlight"></div>
+        
+    <div class="outer">
+        <div class="inner">
+            <div class="icon">1</div>
+            <div class="text">
+                Conference information
+            </div>
+        </div>
+    </div>
+    
+    <div class="outer">
+        <div class="inner">
+            <div class="icon">2</div>
+            <div class="text">
+                Research Area
+            </div>
+        </div>
+    </div>
+    
+    <div class="outer">
+        <div class="inner">
+            <div class="icon">3</div>
+            <div class="text">
+                Topics
+            </div>
+        </div>
+    </div>
+        
+    </div>
+</div> 
+
+<form method="POST" action={% url 'addcon' %} class="main" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="containerrr">
+        <fieldset>
+            <div class="title">
+          <h2>Conference information</h2>
+          <p class="desc">Please enter conference infomation and proceed to next step so we can build your conference</p></div>
+           <div class="form  " >
+                    <div class="form__group">
+                      {% render_field form.name class="form__input" placeholder=" "%}
+                      <label for="name" class="form__label">Name</label>
+                      </div>
+                     <div class="group"></div>
+                    <div class="form__group">
+                        {% render_field form.acronym class="form__input" placeholder=" "%}
+                      <label for="Acronym" class="form__label">Acronym</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                      {% render_field form.webpage class="form__input" placeholder=" "%}
+                      <label for="url" class="form__label">Web Page</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                      {% render_field form.city class="form__input" placeholder=" "%}
+                      <label for="text" class="form__label">City</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                        {% render_field form.country class="form__input" placeholder=" "%}
+                        <label for="text" class="form__label">Country</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                        {% render_field form.startdate class="form__input" placeholder=" "%}
+                        <label type="date" class="form__label">Start date</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                        {% render_field form.registrationdeadline class="form__input" placeholder=" "%}
+                        <label type="date" class="form__label">Registration deadline</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                        {% render_field form.soumissiondeadline class="form__input" placeholder=" "%}
+                        <label type="date" class="form__label">Soumission     deadline</label>
+                    </div>
+                </div>
+        </fieldset>
+        
+        <fieldset class="f2">
+            <div class="title">
+          <h2>Research Area</h2>
+          <p class="desc">Please enter research infomation and proceed to next step so we can build your conference</p></div>
+           <div class="form  " >
+                    <div class="form__group">
+                      {% render_field form.primaryresearch class="form__input" placeholder=" "%}
+                      <label for="text" class="form__label">Primary Research</label>
+                      </div>
+                     <div class="group"></div>
+                    <div class="form__group">
+                      {% render_field form.secoundaryresearch class="form__input" placeholder=" "%}  
+                      <label for="text" class="form__label">Secoundary Research</label>
+                    </div>
+                    <div class="group"></div>
+                    <div class="form__group">
+                        
+                        {% render_field form.areanite class="form__input" placeholder=" "%}
+                      <label for="textarea" class="ta">Area Note</label>
+                    </div>
+                    
+                </div>
+        </fieldset>
+       
+        <fieldset class="f3">
+            <div class="title">
+          <h2>Topics</h2>
+          <p class="desc">Please enter topics infomation and proceed to next step so we can build your conference</p></div>
+           <div class="form  " >
+                    <div class="form__group">
+                        {% render_field form.topicone class="form__input" placeholder=" "%}
+                      <label for="text" class="form__label">Topic 01</label>
+                      </div>
+                     <div class="group"></div>
+                    <div class="form__group">
+                        {% render_field form.topictwo class="form__input" placeholder=" "%}
+                      <label for="text" class="form__label">Topic 02</label>
+                    </div>
+                    <div class="form__group">
+                        {% render_field form.topicthree class="form__input" placeholder=" "%}
+                        <label for="text" class="form__label">Topic 03</label>
+                    </div>
+                    <div class="form__group">
+                        {% render_field form.topicfour class="form__input" placeholder=" "%}
+                        <label for="text" class="form__label">Topic 04</label>
+                    </div>
+                </div>
+        </fieldset>
+        
+         <div class="drop-zone">
+            <span class="drop-zone__prompt">Drop or click to upload your template</span>
+            {% render_field form.pdftem class="drop-zone__input" %}
+        </div>
+       >
+    </div>
+    <button class="form__button" type="Submit" >
+    <div class="signuptext">Create Your Conference</div>
+    </button>
+</form>
+
+ <script>
+    $(function () {
+      $("#id_startdate").datetimepicker();
+    });
+  </script
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="{% static 'authentication/js/addcon.js' %}"></script>
+
+</body>
+</html>
