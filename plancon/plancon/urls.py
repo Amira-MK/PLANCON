@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('addcon/',views.addcon,name="addcon"), 
-   
+    path('', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
