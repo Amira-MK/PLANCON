@@ -1,0 +1,62 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/SignUp.css' %}">
+    <title>login</title>
+</head>
+<body>
+    <section>
+        <img class="logoimg" src="{% static 'authentication/img/logo.png' %}">
+        <div class="logoname">PLANCONF</div>
+        
+        <div class="container">
+            <img class="cer" src="{% static 'authentication/img/cerr.png' %}">
+        </div>
+        <img class="line2" src="{% static 'authentication/img/line22.png' %}">
+        <img class="line1" src="{% static 'authentication/img/line1.png' %}">
+        <img class="line3" src="{% static 'authentication/img/line3.png' %}"> 
+
+        <div class="text">Login </div>
+
+
+    <form class="form" method="post" action="{% url 'plancon:login' %}">
+        {% csrf_token %}
+        <div class="espace">
+            <div class="form__group">
+                {% render_field form.username class="form__input" placeholder=" " %}
+                <label for="username" class="form__label">Username</label>
+            </div>
+            <div class="group"></div>
+            <div class="form__group">
+                {% render_field form.password class="form__input" placeholder=" " %}
+                <label for="password" class="form__label">Password</label>
+            </div>
+            <p class="signup"><a href="/register" >You Don't Have An account?</a></p>
+            <p class="signup"><a href="{% url 'plancon:reset_password' %}">Forgot password? </a></p>
+            {% if form.errors %}
+            <button class="form__button" onClick="error()" type='submit'>
+                <div class="signuptext">Sign in</div>
+            </button>
+            {% else %}
+            <button class="form__button" type='submit'>
+                <div class="signuptext">login</div>
+            </button>
+            {% endif %}
+
+            <input type="hidden" name="next" value="{{ next }}"> <!--next is the next page aka user dashboard-->
+        </div> 
+    </form>
+    </section>
+    
+    <script>
+        function error() {
+            alert("Please enter a correct username and password. Note that both fields may be case-sensitive.");
+        }
+    </script>
+</body>
+</html>

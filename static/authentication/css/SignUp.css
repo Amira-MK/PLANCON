@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box; /*border are include in height and weight*/
+}
+
+body{
+    background: #203239 ;
+    overflow: hidden;
+    min-height: 100vh; /*Relative to 1% of the height of the viewport*/
+}
+
+
+
+.espace{
+    position: absolute;
+    top: 120%;
+    width: 80%;
+}
+
+section{
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+}
+
+
+
+
+.logoimg{
+    position: absolute;
+    width: 7%;
+    height: 7%;
+    left: 2%;
+    top: 1%;
+}
+
+.logoname{
+    position: absolute;
+    left: 2.5%;
+    top: 9%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 100;
+    line-height: 6%;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(255, 255, 255, 0.53);
+}
+
+.cer{
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    bottom: 5%;
+    left: 23%;
+}
+
+.line1{
+    width: 100%;
+    height: 85%;
+    z-index: 2;
+    position: absolute;
+    top: 15%;
+    
+}
+
+.line2{
+    width: 110%;
+    height: 80%;
+    z-index: 2;
+    position: absolute;
+    top: 17%;
+    
+}
+
+.line3{
+    width: 110%;
+    height: 80%;
+    z-index: 2;
+    position: absolute;
+    top: 17%;
+}
+
+.text{
+    position: absolute;
+    left: 70%;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    color: #203239;
+    line-height: 2%;
+    top: 9%;
+    z-index: 4 ;
+}
+
+.form{
+    position: absolute;
+    top: 5%;
+    width: 35rem;
+    padding: 3rem;
+    left: 8%;
+    z-index: 9;
+}
+
+.form__group{
+    height: 4rem;
+}
+
+
+input{
+    width: 100%;
+    height: 1rem;
+    border: 2px solid rgba(238, 237, 222, 1);
+    border-radius: 1rem;
+    font-family: inherit;
+    font-weight: inherit;
+    color: #E0DDAA;
+    outline: none;
+    padding: 1.25rem;
+    background: rgba(32, 50, 57, 1);
+}
+
+input:hover {
+    border-color: #E0DDAA;
+  }
+
+input:focus {
+    border-color: #E0DDAA;
+}
+
+label{
+    position: relative;
+    left: 1rem;
+    top: -2.2rem;
+    font-size: x-small;
+    color:rgba(238, 237, 222, 1) ;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+}
+
+button{
+    width: 60%;
+    position: relative;
+    left: 5rem;
+    padding: 0.75rem 2rem;
+    background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
+    bottom: 3rem;
+    border-radius: 5rem;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+	display: block;
+    cursor: pointer;
+	transition: .5s;
+    background-size: 200%;
+}
+
+button:hover{
+    background-color: #E0DDAA;
+    background-position:  right;
+}
+
+.signuptext{
+    color: rgba(32, 50, 57, 1);
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.signup{
+    position: relative;
+    bottom:2.3rem ;  
+}
+
+.signup a{
+    margin-left: 0.9rem;
+    color: rgba(238, 237, 222, 1);
+    font-weight: 700;
+    font-size: 0.5rem;
+}
+
+/*.line1{
+    
+    width: 100%;
+    z-index: 1 ;
+}*/
+
+
+.form__input:focus ~ .form__label ,
+.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label  {
+  top: -4rem;  
+  left: 0.8rem;
+  font-size: 0.8rem;
+}
+
+
