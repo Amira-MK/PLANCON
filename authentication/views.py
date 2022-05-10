@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.urls import is_valid_path
 from .forms import RegisterForm
 from .forms import Conferenceform, Articleform, Authorform
-from .models import Chaiman, Conference
+from .models import Chaiman,  Conference
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseNotFound
 import os
@@ -46,8 +46,8 @@ def addarticle(request,conf_id):
           fs.user=request.user
           fs.save()
           fa=form1.save(commit=False)
+          fa.user=request.user
           fa.save()
-          return redirect("plancon:addarticle")
        else:
             form = Articleform
             form1 = Authorform

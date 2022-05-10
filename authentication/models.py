@@ -14,6 +14,16 @@ from django import forms
 
 
 # Create your models here.
+
+class Article(models.Model):
+    title = models.CharField(max_length=100)
+    abstract = models.TextField(max_length=1000)
+    domaine = models.CharField(max_length=100)
+    sous_domaine = models.CharField(max_length=100)
+    keywords = models.TextField(max_length=100)
+    file = models.FileField()
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
 class Conference(models.Model):
     name = models.CharField(max_length=500)
     acronym = models.CharField(max_length=500)
@@ -32,8 +42,9 @@ class Conference(models.Model):
     topicfour = models.CharField(max_length=500)
     pdftem = models.FileField(upload_to='documents/',default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    article=models.ManyToManyField(Article,related_name='article',blank = True)
 
-    
+
 class Chaiman (User):
     conf = models.ForeignKey(Conference,on_delete=models.CASCADE)
     
@@ -44,15 +55,8 @@ class Author(models.Model):
     country = models.CharField(max_length=25)
     organization = models.CharField(max_length=255)
     webpage = models.CharField(max_length=55)  
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
-class Article(models.Model):
-    title = models.CharField(max_length=100)
-    abstract = models.TextField(max_length=1000)
-    domaine = models.CharField(max_length=100)
-    sous_domaine = models.CharField(max_length=100)
-    keywords = models.TextField(max_length=100)
-    file = models.FileField()
-    aurhor=models.OneToOneField(Author, on_delete=models.CASCADE, null=True)
 
 class association(models.Model):
     articleid = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
