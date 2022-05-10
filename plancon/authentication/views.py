@@ -2,15 +2,22 @@
 from cProfile import Profile
 from multiprocessing import context
 from re import template
-from django.http import HttpResponseRedirect
+from urllib.request import Request
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.urls import is_valid_path
 from .forms import RegisterForm
-from .forms import Conferenceform
-from .models import Conference
+from .forms import Conferenceform, Articleform, Authorform
+from .models import Chairman, Conference
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse, HttpResponseNotFound
+import os
+from .models import Article
+from .models import Author
+from django.http import FileResponse
 
 # Create your views here.
 
@@ -19,7 +26,38 @@ def index(request):
     return render(request, 'dashboard/index.html')
 
 def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
+    Conferences = Conference.objects.all()
+    return render(request, 'dashboard/dashboard.html',{'Conferences':Conferences})
+
+def aboutconf(request ,conf_id):
+    myconference = Conference.objects.get(pk=conf_id)
+    filepath = os.path.join('static', 'sample.pdf')
+    return render(request, 'dashboard/aboutconf.html',{'Conference':myconference})
+
+def addarticle(request,conf_id):
+    myconference = Conference.objects.get(pk=conf_id)
+    allarticle = Article.objects.all()
+    researcher = Author.objects.all()
+    if request.method == 'POST':
+       form = Articleform(request.POST , request.FILES)
+       form1 = Authorform (request.POST)
+       if form.is_valid() and form1.is_valid():
+          fs=form.save(commit=False)
+          fs.user=request.user
+          fs.save()
+          fa=form1.save(commit=False)
+          fa.user=request.user
+          fa.save()
+
+       else:
+            form = Articleform
+            form1 = Authorform
+    form = Articleform
+    form1 = Authorform
+    context={'form':form,'form1':form1,'allarticle':allarticle,'researcher':researcher,'Conference':myconference,}
+    return render (request, 'dashboard/addarticle.html',context)
+
+
 
 def addcon(request):
     allconf= Conference.objects.all()
@@ -30,11 +68,17 @@ def addcon(request):
             fs=form.save(commit=False)
             fs.user=request.user
             fs.save()
+           
+            
+            chairman = Chairman(user=request.user, conference=fs)
+            chairman.save()
+
             return redirect("plancon:addcon")
         else:
             form = Conferenceform
             if 'subbmitted' in request.GET:
                 subbmitted = True 
+        
     form = Conferenceform
     context={'form':form,'allconf':allconf,'subbmitted':subbmitted,}
     return render(request, 'dashboard/addcon.html',context)

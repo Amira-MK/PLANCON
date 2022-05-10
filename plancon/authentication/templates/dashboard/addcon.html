@@ -176,6 +176,21 @@
                         {% render_field form.topicfour class="form__input" placeholder=" "%}
                         <label for="text" class="form__label">Topic 04</label>
                     </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form__group">
+                        {% render_field form.reviewerOne class="form__input" placeholder=" "%}
+                        <label for="text" class="form__label">reviewer 1</label>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form__group">
+                        {% render_field form.reviewerTwo class="form__input" placeholder=" "%}
+                        <label for="text" class="form__label">reviewer 2</label>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form__group">
+                        {% render_field form.reviewerThree class="form__input" placeholder=" "%}
+                        <label for="text" class="form__label">reviewer 3</label>
+                    </div>
                 </div>
         </fieldset>
         
@@ -183,7 +198,7 @@
             <span class="drop-zone__prompt">Drop or click to upload your template</span>
             {% render_field form.pdftem class="drop-zone__input" %}
         </div>
-       >
+       
     </div>
     <button class="form__button" type="Submit" >
     <div class="signuptext">Create Your Conference</div>

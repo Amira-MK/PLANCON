@@ -327,7 +327,7 @@ p.desc {
  .form__button{
     width: 30%;
     position: absolute;
-    left: 25rem;
+    left: 20rem;
     padding: 0.75rem 2rem;
     background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
     top: 134rem;
@@ -354,7 +354,7 @@ p.desc {
 
 .drop-zone {
   position: relative;
-  left: 21rem;
+  left: 16rem;
   top:30%;
   width: 49%;
   height: 20rem;

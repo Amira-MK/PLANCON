@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w$6mv8=ldcq0i&vh2s4l@3gdph1ahh^waxm&4m81q0@l#_&tl='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
 ALLOWED_HOSTS = []
 
@@ -59,6 +59,7 @@ ROOT_URLCONF = 'plancon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'DIRS': ['template'],
         'APP_DIRS': True,
         'OPTIONS': {

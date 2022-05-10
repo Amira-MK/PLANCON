@@ -1,7 +1,9 @@
+from ast import Delete
 from distutils.command.upload import upload
 from hashlib import blake2b
 import imp
 from re import template
+from tkinter import CASCADE
 from unicodedata import name
 from xml.dom import UserDataHandler
 from django.db import models
@@ -12,6 +14,16 @@ from django import forms
 
 
 # Create your models here.
+
+class Article(models.Model):
+    title = models.CharField(max_length=100)
+    abstract = models.TextField(max_length=1000)
+    domaine = models.CharField(max_length=100)
+    sous_domaine = models.CharField(max_length=100)
+    keywords = models.TextField(max_length=100)
+    file = models.FileField()
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
 class Conference(models.Model):
     name = models.CharField(max_length=500)
     acronym = models.CharField(max_length=500)
@@ -30,4 +42,42 @@ class Conference(models.Model):
     topicfour = models.CharField(max_length=500)
     pdftem = models.FileField(upload_to='documents/',default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    article=models.ManyToManyField(Article,related_name='article',blank = True)
     
+    reviewerOne = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerOne')
+    reviewerTwo = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerTwo')
+    reviewerThree = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerThree')
+
+class Chairman(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #reveiwers = models.ManyToManyField(User, related_name='reviewers', blank=True)
+    conference = models.OneToOneField(Conference, related_name='conference', on_delete=models.CASCADE, blank=False, null=False)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True) 
+
+
+    def get_reveiwers(self):
+        return self.reveiwers.all() 
+
+    def get_reviewers_count(self):
+        return self.reveiwers.count()
+
+    class Meta:
+        verbose_name_plural = "Chairmen"
+
+
+    def __str__(self):
+        return str(self.user)    
+class Author(models.Model):
+    first_name = models.CharField(max_length=50)  
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    country = models.CharField(max_length=25)
+    organization = models.CharField(max_length=255)
+    webpage = models.CharField(max_length=55)  
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+
+class association(models.Model):
+    articleid = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
+    Confid = models.ForeignKey(Conference, on_delete=models.CASCADE, null=True)

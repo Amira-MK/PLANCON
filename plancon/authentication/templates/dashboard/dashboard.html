@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
     <!-- Style.css -->
     <title>dashboard</title>
-    <link rel="stylesheet" href="{% static 'authentication/css/Nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/Nav.css' %}">
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -45,6 +45,17 @@
     <button type='submit'><a href='/register'>register</a></button>
     <a href='/'>index</a>
     {% endif %}
+    {% for Conference in Conferences%}
+     <div class="form_group">
+      <p><a class="signup" href="{% url 'plancon:aboutconf' Conference.pk %}" id="iclicked" >{{ Conference.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+          {{ Conference.name }}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+          {{ Conference.startdate }} &nbsp; &nbsp; &nbsp;
+          Read more to add your article</p>
+     </div>
+     <div class="spacebtw"></div>
+    {% endfor %}
+
+    <script src="{% static 'authentication/js/dashabout.js' %}"></script>
 
 </body>
 </html>

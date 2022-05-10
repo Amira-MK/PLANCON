@@ -15,18 +15,22 @@ Including another URLconf
 """
 from os import stat
 from django.conf import settings
+from django.urls import re_path
 from django.contrib import admin
 from django.urls import path, include
 from authentication import views
 from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
-    path('addcon/',views.addcon,name="addcon"), 
+    path('addcon/',views.addcon,name="addcon"),
+    path('addarticle/<conf_id>/',views.addarticle,name="addarticle"), 
     path('', include('django.contrib.auth.urls')),
 ]
+urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
