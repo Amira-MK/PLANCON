@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.urls import is_valid_path
 from .forms import RegisterForm
 from .forms import Conferenceform, Articleform, Authorform
-from .models import Chairman, Conference
+from .models import Chairman, Conference, Reviewer
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseNotFound
 import os
@@ -72,6 +72,13 @@ def addcon(request):
             
             chairman = Chairman(user=request.user, conference=fs)
             chairman.save()
+
+            reviewer = Reviewer(user=fs.reviewerOne, conference=fs)
+            reviewer.save()
+            reviewer = Reviewer(user=fs.reviewerTwo, conference=fs)
+            reviewer.save()
+            reviewer = Reviewer(user=fs.reviewerThree, conference=fs)
+            reviewer.save()
 
             return redirect("plancon:addcon")
         else:
