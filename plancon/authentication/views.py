@@ -49,6 +49,12 @@ def addarticle(request,conf_id):
           fa.user=request.user
           fa.save()
 
+
+
+          conf = Conference.objects.get(pk=conf_id)
+          conf.article.add(fs)
+
+
        else:
             form = Articleform
             form1 = Authorform
@@ -67,8 +73,9 @@ def addcon(request):
         if form.is_valid():
             fs=form.save(commit=False)
             fs.user=request.user
+            #fs.article=request.user.article_set.all()
             fs.save()
-           
+            
             
             chairman = Chairman(user=request.user, conference=fs)
             chairman.save()
@@ -129,3 +136,12 @@ def logout_view(request):
     logout(request)
     messages.success(request,('you logged out!'))
     return redirect('plancon:index')
+
+
+def myConferences(request):
+    conferences = Conference.objects.all()
+    myconferences = []
+    for conference in conferences:
+        if conference.user == request.user:
+            myconferences.append(conference)
+    return render(request, 'dashboard/myconfe.html', {'myconferences': myconferences})

@@ -1,0 +1,69 @@
+
+
+exo1
+
+1--- distinct-values(doc("mondial.xml")//religion)
+2---for $a in doc("mondial.xml")//country[name ="Algeria"]/border/@country
+return
+<pays>{$a}</pays>
+3---for $a in doc("mondial.xml")//country[name="Algeria"]/border/@country
+for $f in doc("mondial.xml")//country[name="Libya"]/border/@country
+return 
+if ($a=$f) then data($f)
+else ()
+
+for $a in doc("mondial.xml")//country[name="Algeria"]/border/@country
+for $f in doc("mondial.xml")//country[name="Libya"]/border/@country
+return 
+if ($a=$f) then 
+let $c:= //country[@car_code=$f]
+return $c/name
+else ()
+
+for $a in doc("mondial.xml")//country[border[@country="DZ" ]and border[@country="LAR" ]]
+return $a/name
+
+4---let $a:=doc("mondial.xml")//country[name="Algeria"]/@area
+let $b:=doc("mondial.xml")//country[name="Tunisia"]/@area
+return 
+$a div $b
+
+5---for $pm in doc("mondial.xml")//country[religion="Muslim"]
+let $nbr:= $pm/religion[.="Muslim"]/@percentage  * //$pm/population[last()] div 100
+order by $nbr descending
+return
+<pays nom="{$pm/name}">
+{format-number($nbr, "#,###,###,###")}
+</pays>
+
+
+6---for $a in doc("mondial.xml")//country return element pays {
+attribute nom {$a/name/text()},
+element villes {
+for $v at $i in $a//city where $i <= 2 return
+$v/name, 
+if (count($a//city) > 2) then "..." else ""}}
+
+
+7---let $a:=doc("mondial.xml")//country[name="Algeria"]/population[last()] 
+let $b:=doc("mondial.xml")//country[name="Morocco"]/population[last()] 
+return  $a > $b 
+8---let $l:=max(doc("mondial.xml")//country[name='Algeria' ]/language/@percentage ) 
+let $p := doc("mondial.xml")//country[name='Algeria' ]/population[last()]
+let $r:=$l*$p div 100
+let $lang:= doc("mondial.xml")//country[name='Algeria' ]/language[@percentage =$l]
+return
+<population Langue="{$lang}">
+{$r}
+</population>
+9---let $a1:= for $a in doc("mondial.xml")//country order by ($a/@area) descending
+return $a/name
+let $a2:= for $a in doc("mondial.xml")//country order by ($a/population[last()]) descending
+return $a/name
+return $a1[last()] is $a2[last()]
+
+
+exo2
+1---for $a in doc("customers.xml")//customer[city="Sidi Bel Abbes"]
+return $a/name
+2---

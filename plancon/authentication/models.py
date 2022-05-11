@@ -44,9 +44,11 @@ class Conference(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     article=models.ManyToManyField(Article,related_name='article',blank = True)
     
-    reviewerOne = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerOne')
-    reviewerTwo = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerTwo')
-    reviewerThree = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerThree')
+    reviewerOne = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='reviewerOne')
+    reviewerTwo = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='reviewerTwo')
+    reviewerThree = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='reviewerThree')
+
+
 
 class Chairman(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
