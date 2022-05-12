@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
     <!-- Style.css -->
     <link rel="stylesheet" href="{% static 'authentication/css/Nav.css' %}">
+    <link rel="stylesheet" href="{% static 'authentication/css/myconf.css' %}">
 </head>
 
 <body>
@@ -41,11 +42,15 @@
         <p>{{user.username}}'s Conferences</p>
 
         {% for conf in myconferences%}
-        <div class="form_group">
-         <p><a class="signup" href="{% url 'plancon:myConferences' %}" id="iclicked" >{{ conf.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        <div class="conf_form_group">
+            <p><a class="signup" href="{% url 'plancon:about_myconf' conf.pk %}" id="iclicked" >{{ conf.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
              {{ conf.name }}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
              {{ conf.startdate }} &nbsp; &nbsp; &nbsp;
-             Read more to add your article</p>
+             view my Conference</p>
+            <!--add Button-->
+            <button type="button" class='rev__button' >
+                <a href="{% url 'plancon:submitedArticles' conf.pk %}">View Submitted papers</a>
+            </button>
         </div>
         <div class="spacebtw"></div>
        {% endfor %}

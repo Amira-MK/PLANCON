@@ -145,3 +145,12 @@ def myConferences(request):
         if conference.user == request.user:
             myconferences.append(conference)
     return render(request, 'dashboard/myconfe.html', {'myconferences': myconferences})
+
+def about_myconf(request ,conf_id):
+    myconference = Conference.objects.get(pk=conf_id)
+    return render(request, 'dashboard/about_myconf.html',{'Conference':myconference})
+
+
+def submitedArticles(request,conf_id):
+    articles = Conference.objects.get(pk=conf_id).article.all()
+    return render(request, 'dashboard/submittedArticle.html', {'articles': articles})
