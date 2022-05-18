@@ -1,0 +1,36 @@
+.rev__button{
+    width: 40%;
+    position: relative;
+    left: 20rem;
+    /* padding: 0.75rem 2rem; */
+    background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
+    bottom: 2.25rem;
+    border-radius: 5rem;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+    display: block;
+    cursor: pointer;
+    transition: .5s;
+    background-size: 200%;
+
+}
+
+.txt{
+    color: rgba(32, 50, 57, 1);
+}
+
+.conf_form_group{
+    width: 80%;
+    position: relative;
+    height: 5rem;
+    left: 10rem;
+    border: 2px solid #E0DDAA;
+    border-radius: 1rem;
+    font-family: inherit;
+    font-weight: inherit;
+    color: rgba(238, 237, 222, 1);
+    outline: none;
+    padding: 1.25rem;
+    background: rgba(32, 50, 57, 1);
+}

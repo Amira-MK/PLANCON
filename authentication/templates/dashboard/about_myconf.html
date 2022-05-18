@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+    <!-- Style.css -->
+    <title>dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/aboutconf.css' %}">
+</head>
+<body>
+         <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-mainbg">
+            <!-- Logo -->
+            <a class="navbar-brand navbar-logo" href="#"><img src="{% static 'authentication/img/Logoweb.png' %}"></a>
+            <!-- Collapse Button -->
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <!-- For Styling -->
+                    <li><a href="{% url 'plancon:dashboard' %}" class="active">Dashboard</a></li>
+                    <li><a href="{% url 'plancon:addcon' %}" class="">Add Conference</a></li>
+                    <li><a href="{% url 'plancon:myConferences'  %}" class="">My Conferences</a></li>
+                    <li><a href="myart.html" class="">My articles</a></li>
+                    <li><a href="myrev.html" class="">My reviews</a></li>
+                    <li><a href="pro.html" class="">profile</a></li>
+                </ul>
+        </div> </nav>
+
+     <div class="form_group">
+         <h3>{{ Conference.name }} Conference </h3>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>Acronym of Conference:</h4>
+         <p id="idacronym">{{ Conference.acronym }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4> Time : </h4>
+        <p> Start :  &nbsp; {{ Conference.startdate }}  
+         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            Registration Deadline: &nbsp; {{ Conference.registrationdeadline }} 
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            Soumission Deadline: &nbsp; {{ Conference.soumissiondeadline }}
+        </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>Web Page of Conference:</h4>
+         <p>{{ Conference.webpage }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>City of Conference:</h4>
+        <p>{{ Conference.city }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Country of Conference:</h4>
+        <p>{{ Conference.country }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Primary Research of Conference:</h4>
+        <p>{{ Conference.primaryresearch }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Secoundary Research of Conference:</h4>
+        <p>{{ Conference.secoundaryresearch }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Research of Conference:</h4>
+        <p>{{ Conference.areanite }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Topic One :</h4>
+        <p>{{ Conference.topicone }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Topic Two :</h4>
+        <p>{{ Conference.topictwo }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Topic Three :</h4>
+        <p>{{ Conference.topicthree }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Topic Four :</h4>
+        <p>{{ Conference.topicfour }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Template :</h4>
+      <a class="template" href="{{ Conference.pdftem.url }}">Click here to upload it</a>
+      
+   </div>
+   <div class="spacebtw"></div>
+   
+   <button class="form__button" href="{% url 'plancon:addarticle' Conference.pk%}">
+      <p><a class="signup" href="{% url 'plancon:addarticle' Conference.pk %}"  >Add article</a>
+   </button>
+  
+</body>
+</html>

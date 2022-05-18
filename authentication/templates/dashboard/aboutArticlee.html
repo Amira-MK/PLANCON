@@ -1,0 +1,96 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+    <!-- Style.css -->
+    <title>dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/aboutconff.css' %}">
+</head>
+<body>
+         <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-mainbg">
+            <!-- Logo -->
+            <a class="navbar-brand navbar-logo" href="#"><img src="{% static 'authentication/img/Logoweb.png' %}"></a>
+            <!-- Collapse Button -->
+            
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <!-- For Styling -->
+                    <li><a href="{% url 'plancon:dashboard' %}" class="active">Dashboard</a></li>
+                    <li><a href="{% url 'plancon:addcon' %}" class="">Add Conference</a></li>
+                    <li><a href="{% url 'plancon:myConferences'  %}" class="">My Conferences</a></li>
+                    <li><a href="myart.html" class="">My articles</a></li>
+                    <li><a href="myrev.html" class="">My reviews</a></li>
+                    <li><a href="pro.html" class="">profile</a></li>
+                </ul>
+        </div> </nav>
+
+        <div class="form_group">
+            <h3>submitted in: {{ conference.name }} </h3>
+        </div>
+    
+     <div class="form_group">
+         <h3>{{ article.title }} </h3>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>Abstract:</h4>
+         <p id="idacronym">{{ article.abstract }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4> Domain : </h4>
+       <p> 
+           {{article.domaine}}
+       </p>
+    </div>
+    <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4> Sub Domain : </h4>
+       <p> 
+           {{article.sous_domaine}}
+       </p>
+    </div>
+    <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>keywords:</h4>
+         <p>{{ article.keywords }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Author:</h4>
+        <p>{{ article.user.username }}  </p>
+     </div>
+
+
+     <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Paper :</h4>
+      <a class="template" href="{{ article.file.url }}">Click here to download the paper</a>
+      
+   </div>
+   <div class="spacebtw"></div>
+   
+   <div class='form_group'>
+        
+        <form action="{% url 'plancon:aboutArticle' article.pk conference.id %}" method="POST">
+            <input type="hidden" name="article_id" value="{{ article.pk }}">
+            <input type="hidden" name="conference_id" value="{{ conference.id }}">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <button class="form__button" type="Submit" >
+                <div class="signuptext">Submit Your Review</div>
+            </button>
+        </form>
+
+   </div>
+  
+</body>
+</html>

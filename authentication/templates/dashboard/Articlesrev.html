@@ -28,33 +28,40 @@
                     <li><a href="{% url 'plancon:addcon' %}" class="">Add Conference</a></li>
                     <li><a href="{% url 'plancon:myConferences' %}" class="">My Conferences</a></li>
                     <li><a href="myart.html" class="">My articles</a></li>
-                    <li><a href="{% url 'plancon:myview' %}" class="">My reviews</a></li>
+                    <li><a href="myrev.html" class="">My reviews</a></li>
                     <li><a href="pro.html" class="">profile</a></li>
                 </ul>
         </div>
         </nav>
-        <p>hello {{user.username}}</p>
+        <!--here i wanted to show the name of the conf and it is not working HELP-->
+        <h1>{{ Conference.name }}'s articles</h1>
 
-        <form action="{% url 'plancon:logout' %}" methode="post">
-            {% csrf_token%}
-            <button type="submit"> logout </button>
-        </form>
+        {% for article in myarticles%}
+        <div class="form_group">
+
+            <p>
+                <a class="signup" href="{% url 'plancon:aboutArticlee' article.pk conference.id %}" id="iclicked" >
+                    {{ article.title }}
+                </a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                {{ article.domaine }}
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                {{ article.sous_domaine }}
+                &nbsp; &nbsp; &nbsp;
+                {{ article.keywords }}
+                Click here to see the article
+            </p>
+        </div>
+        <div class="spacebtw"></div>
+    {% endfor %}
+        
+        
     {% else %}
     <h1>NO</h1>
     <button type='submit'><a href='/login'>login</a></button>
     <button type='submit'><a href='/register'>register</a></button>
     <a href='/'>index</a>
     {% endif %}
-    {% for Conference in notmyconferences%}
-     <div class="form_group">
-      <p><a class="signup" href="{% url 'plancon:aboutconf' Conference.pk %}" id="iclicked" >{{ Conference.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-          {{ Conference.name }}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-          {{ Conference.startdate }} &nbsp; &nbsp; &nbsp;
-          Read more to add your article</p>
-     </div>
-     <div class="spacebtw"></div>
-    {% endfor %}
-
     <script src="{% static 'authentication/js/dashabout.js' %}"></script>
 
 </body>

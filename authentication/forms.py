@@ -1,4 +1,5 @@
 from dataclasses import fields
+from importlib.metadata import files
 from pyexpat import model
 from re import template
 from statistics import mode
@@ -6,7 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
-from .models import Article, Author, Conference
+
+from .models import Article, Author, Conference, Reviewer, affectation
 
 
 class DateInput(forms.DateInput):
@@ -30,9 +32,12 @@ class Conferenceform(ModelForm):
     topicthree = forms.CharField(max_length=500)
     topicfour = forms.CharField(max_length=500)
     pdftem = forms.FileField()
+    reviewerOne = forms.ModelChoiceField(queryset=User.objects.all())#!except current user
+    reviewerTwo = forms.ModelChoiceField(queryset=User.objects.all())
+    reviewerThree = forms.ModelChoiceField(queryset=User.objects.all())
     class Meta:
         model = Conference
-        fields = ('name','acronym','webpage','city','country','startdate','registrationdeadline','soumissiondeadline','primaryresearch','secoundaryresearch','areanite','topicone','topictwo','topicthree','topicfour','pdftem')
+        fields = ('name','acronym','webpage','city','country','startdate','registrationdeadline','soumissiondeadline','primaryresearch','secoundaryresearch','areanite','topicone','topictwo','topicthree','topicfour','pdftem','reviewerOne', 'reviewerTwo', 'reviewerThree')
 
 
 
@@ -67,3 +72,15 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ('username','first_name', 'last_name', 'email', 'password1','password2')
 
+
+#class AffecterForm(ModelForm):
+ #   reviewerOne = forms.ModelChoiceField(queryset=User.objects.all())
+  #  class Meta:
+   #     model = affecter
+    #    fileds = ('reviewerOne')
+
+class affecterReviewerForm(ModelForm):
+    reviewer = forms.ModelChoiceField(queryset=Reviewer.objects.all()) #Todo : imported from conference  not from Reviewer 
+    class Meta:
+        model = affectation
+        fields = ('reviewer',)

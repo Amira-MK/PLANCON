@@ -92,6 +92,14 @@ body {
    
 }
 
+.form__group1{
+  position: relative;
+  left: 12rem;
+  height: 4rem;
+}
+
+
+
 textarea{
     
     border: 2px solid rgba(238, 237, 222, 1);
@@ -160,6 +168,13 @@ label{
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
 }
 
+.form__label1{
+    color: #E0DDAA;
+    position: relative;
+    left:-21rem;
+    top: 0.25rem;
+}
+
 .form__input:focus ~ .form__label ,
 .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label  {
   top: -4rem;  
@@ -193,8 +208,32 @@ p.desc {
     padding-left: 30%;
 }
 
+#id_reviewerOne{
+    position: relative;
+    top: 0.55rem;
+    color: #E0DDAA;
+    background-color: #203239;
+    border-radius: 0.5rem;
+    border: 2px solid rgba(238, 237, 222, 1);
+}
 
+#id_reviewerTwo{
+  position: relative;
+  top: 0.55rem;
+  color: #E0DDAA;
+  background-color: #203239;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(238, 237, 222, 1);
+}
 
+#id_reviewerThree{
+  position: relative;
+  top: 0.55rem;
+  color: #E0DDAA;
+  background-color: #203239;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(238, 237, 222, 1);
+}
 
  .inner {
     display: flex;
@@ -330,7 +369,7 @@ p.desc {
     left: 20rem;
     padding: 0.75rem 2rem;
     background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
-    top: 134rem;
+    top: 145rem;
     border-radius: 5rem;
     outline: none;
     border: none;
