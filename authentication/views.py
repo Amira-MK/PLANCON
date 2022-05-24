@@ -228,13 +228,18 @@ def aboutreview(request,article_id, conf_id):
     conference = Conference.objects.get(id=conf_id)
     articlee = Article.objects.get(pk=article_id)
     rev = reviewing.objects.filter(article=articlee)
+    revi = reviewing.objects.all()
     print(rev)
+    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     form = aboutrevForm(request.POST)
 
     if request.method == "POST" :
         if form.is_valid():
             fs=form.save(commit=False)
-            aff = aboutrev(conferencee=conference,article=articlee,observationn=fs.observationn,reviewingg=rev)
+            rrr = []
+            for revs in rev:
+                rrr.append(revs)
+                aff = aboutrev(conferencee= conference,article=articlee,reviewingg=revs,observationn=fs.observationn )
             aff.save()
         else:
             form = aboutrevForm
