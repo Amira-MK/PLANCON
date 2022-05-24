@@ -41,56 +41,71 @@
          <h3>{{ article.title }} </h3>
      </div>
      <div class="spacebtw"></div>
+ {% for review in rev%}
      <div class="form_group">
-         <h4>Abstract:</h4>
-         <p id="idacronym">{{ article.abstract }} </p>
+         <h4>Global Appreciation:</h4>
+         <p id="idacronym">{{ review.globalorig }} </p>
      </div>
+ 
      <div class="spacebtw"></div>
      <div class="form_group">
-        <h4> Domain : </h4>
+        <h4> Originality : </h4>
        <p> 
-           {{article.domaine}}
+           {{review.originality}}
        </p>
     </div>
     <div class="spacebtw"></div>
      <div class="form_group">
-        <h4> Sub Domain : </h4>
+        <h4> Soundness : </h4>
        <p> 
-           {{article.sous_domaine}}
+           {{review.soundness}}
        </p>
     </div>
     <div class="spacebtw"></div>
      <div class="form_group">
-         <h4>keywords:</h4>
-         <p>{{ article.keywords }} </p>
+         <h4>Presentation:</h4>
+         <p>{{ review.presentation }} </p>
      </div>
      <div class="spacebtw"></div>
      <div class="form_group">
-        <h4>Author:</h4>
-        <p>{{ article.user.username }}  </p>
+        <h4>Relevence:</h4>
+        <p>{{ review.relevence }}  </p>
      </div>
-
-
      <div class="spacebtw"></div>
      <div class="form_group">
-      <h4>Paper :</h4>
-      <a class="template" href="{{ article.file.url }}">Click here to download the paper</a>
-      
+      <h4>Importance :</h4>
+      <p>{{ review.importance }}  </p>
    </div>
    <div class="spacebtw"></div>
-   
-   <div class='form_group'>
-        
-        <form action="{% url 'plancon:addreview' article.pk conference.id %}" method="POST">
-            <input type="hidden" name="article_id" value="{{ article.pk }}">
-            <input type="hidden" name="conference_id" value="{{ conference.id }}">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            <button class="form__button" type="Submit" >
-                <div class="signuptext">Submit Your Review</div>
-            </button>
-        </form>
-
+     <div class="form_group">
+      <h4>Observation :</h4>
+      <p>{{ review.observation }}  </p>
    </div>
-  
+   <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Final :</h4>
+      <p>{{ review.finall }}  </p>
+   </div>
+ {%endfor%}
+   <div class="spacebtw"></div>
+   <div class='form_group'>
+    <h4>Chairman decision:</h4>
+    <form action="{% url 'plancon:aboutreview' article.pk conference.id %}" method="POST">
+        <input type="hidden" name="article_id" value="{{ article.pk }}">
+        <input type="hidden" name="conference_id" value="{{ conference.id }}">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        
+        <div class="form__group2">
+            {% render_field form.observationn class="forl" %}
+            <label type="text" class="form__label2"></label>
+        </div>
+            
+           
+        
+        <button type="submit" class="form__button">Send to reseacher</button>
+    </form>
+
+</div>
+
 </body>
 </html>

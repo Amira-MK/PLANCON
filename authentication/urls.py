@@ -21,14 +21,15 @@ urlpatterns = [
     path('logout',views.logout_view, name='logout'),
     path('about_myconf/<int:conf_id>/', views.about_myconf,name='about_myconf'),
     path('about_myconfmyrev/<int:conf_id>/', views.about_myconfmyrev,name='about_myconfmyrev'),
-    path('submitedArticles/<int:conf_id>/', views.submitedArticles,name='submitedArticles'),
+    #path('submitedArticles/<int:conf_id>/', views.submitedArticles,name='submitedArticles'),
     path('Articlesrev/<int:conf_id>/', views.Articlesrev,name='Articlesrev'),
     path ('aboutArticle/<int:article_id>/<int:conf_id>/', views.aboutArticle,name='aboutArticle'),
+    path ('aboutreview/<int:article_id>/<int:conf_id>/', views.aboutreview,name='aboutreview'),
     path ('aboutArticlee/<int:article_id>/<int:conf_id>/', views.aboutArticlee,name='aboutArticlee'),
     path('reset_password/',auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html') , name='reset_password'),
     path('submitedConfArticles/<int:conf_id>/', views.submitedArticles,name='submitedArticles'),
     path ('aboutArticle/<int:article_id>/<int:conf_id>/', views.aboutArticle,name='aboutArticle'),
-
+    path('addreview/<int:article_id>/<int:conf_id>/', views.addreview,name='addreview'),
     path('update_myconf/<int:conf_id>/', views.update_myconf,name='update_myconf'),
     path('delete_myconf/<int:conf_id>/', views.delete_myconf,name='delete_myconf'),
 

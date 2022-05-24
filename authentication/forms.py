@@ -2,13 +2,14 @@ from dataclasses import fields
 from importlib.metadata import files
 from pyexpat import model
 from re import template
+from secrets import choice
 from statistics import mode
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
 
-from .models import Article, Author, Conference, Reviewer, affectation
+from .models import Article, Author, Conference, Reviewer, affectation, reviewing, aboutrev
 
 
 class DateInput(forms.DateInput):
@@ -84,3 +85,34 @@ class affecterReviewerForm(ModelForm):
     class Meta:
         model = affectation
         fields = ('reviewer',)
+
+class aboutrevForm(ModelForm):
+    CHOICES = (
+        ('You have been selected!!!', 'You have been selected'),
+        ('You are not selected!!!', 'You are not selected '),
+    )
+    observationn = forms.CharField(max_length=500 ,widget=forms.Select(choices=CHOICES))
+    class Meta:
+        model = aboutrev
+        fields = ('observationn',)
+
+class reviewingform(ModelForm):
+    globalorig = forms.CharField(max_length=500)
+    originality = forms.CharField(max_length=500)
+    soundness = forms.CharField(max_length=500)
+    presentation = forms.CharField(max_length=500)
+    relevence = forms.CharField(max_length=500)
+    importance = forms.CharField(max_length=500)
+    observation = forms.CharField(max_length=500)
+    CHOICES = (
+        ('STRONG ACCEPT!', 'Strong Accept'),
+        ('ACCEPT', 'Accept'),
+        ('BORDERLINE', 'Borderline'),
+        ('WEAK', 'Weak'),
+        ('REJECT', 'Reject'),
+    )
+    finall = forms.CharField(max_length=500 , widget=forms.Select(choices=CHOICES))
+   
+    class Meta:
+        model = reviewing
+        fields = ('globalorig','originality','soundness','presentation','relevence','importance','observation','finall')

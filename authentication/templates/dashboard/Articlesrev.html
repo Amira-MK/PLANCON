@@ -33,12 +33,12 @@
                 </ul>
         </div>
         </nav>
-        <!--here i wanted to show the name of the conf and it is not working HELP-->
+        <!--here i wanted to show the name of the conf and it is not working HELP--><!--THE F*-->
         <h1>{{ Conference.name }}'s articles</h1>
 
         {% for article in myarticles%}
         <div class="form_group">
-
+<!-- hihi -->
             <p>
                 <a class="signup" href="{% url 'plancon:aboutArticlee' article.pk conference.id %}" id="iclicked" >
                     {{ article.title }}

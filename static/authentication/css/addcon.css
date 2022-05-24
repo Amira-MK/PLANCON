@@ -98,6 +98,32 @@ body {
   height: 4rem;
 }
 
+.form__group2{
+  position: relative;
+  left: 13rem;
+  
+  height: 4rem;
+  font-weight: bolder;
+  
+}
+
+.form__label2{
+  color: #E0DDAA;
+  position: relative;
+  font-size: large;
+  left:-21rem;
+  background: #203239;
+  top: 0.25rem;
+}
+
+.forl{
+  color: #E0DDAA;
+  position: relative;
+  left:-5rem;
+  background: #203239;
+  top: 0.25rem;
+}
+
 
 
 textarea{
@@ -174,6 +200,8 @@ label{
     left:-21rem;
     top: 0.25rem;
 }
+
+
 
 .form__input:focus ~ .form__label ,
 .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label  {
@@ -383,6 +411,28 @@ p.desc {
 .form__button:hover{
     background-color: #E0DDAA;
     background-position:  right;
+}
+
+.form__button1{
+  width: 30%;
+  position: absolute;
+  left: 31rem;
+  padding: 0.75rem 2rem;
+  background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
+  top: 45rem;
+  border-radius: 5rem;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  display: block;
+  cursor: pointer;
+  transition: .5s;
+  background-size: 200%;
+}
+
+.form__button1:hover{
+  background-color: #E0DDAA;
+  background-position:  right;
 }
 
 .signuptext{

@@ -36,13 +36,15 @@
         <!--here i wanted to show the name of the conf and it is not working HELP-->
         <h1>{{ Conference.name }}'s articles</h1>
 
-        {% for article in articles%}
-        <div class="form_group">
+    {% for article in articles%}
+         
+          <div class="form_group">
 
             <p>
                 <a class="signup" href="{% url 'plancon:aboutArticle' article.pk conference.id %}" id="iclicked" >
                     {{ article.title }}
                 </a>
+                
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                 {{ article.domaine }}
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
@@ -50,6 +52,20 @@
                 &nbsp; &nbsp; &nbsp;
                 {{ article.keywords }}
                 Click here to see the article
+                <!--?????????????????????????????????????????-->
+                {% comment %} {% if rreviewing.article%}
+                    {% if rreviewing.reviewed %}
+                        reviewed    
+                    {% endif %}
+                {% endif %} {% endcomment %}
+                {% comment %} {{rreviewing.reviewed}} {% endcomment %}
+                 {% comment %} {% if rreviewing.reviewed  %}
+                   <p>REVIEWED</p>
+                 {% endif %} {% endcomment %}
+                 &nbsp; &nbsp; &nbsp;
+                 <a class="signup1" href="{% url 'plancon:aboutreview' article.pk conference.id %}" id="iclicked" >
+                    View Reviewing Results
+                </a>
             </p>
         </div>
         <div class="spacebtw"></div>

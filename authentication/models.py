@@ -92,3 +92,35 @@ class affectation(models.Model):
     conferencee = models.ForeignKey(Conference,on_delete=models.CASCADE)
     article = models.ForeignKey(Article,on_delete=models.CASCADE)
     reviewer = models.ForeignKey(Reviewer,on_delete=models.CASCADE)
+
+
+
+class reviewing(models.Model):
+    globalorig = models.CharField(max_length=500)
+    originality= models.CharField(max_length=500)
+    soundness = models.CharField(max_length=500)
+    presentation = models.CharField(max_length=500)
+    relevence = models.CharField(max_length=500)
+    importance = models.CharField(max_length=500)
+    observation = models.CharField(max_length=500)
+    conferencee = models.ForeignKey(Conference,on_delete=models.CASCADE)
+    article = models.ForeignKey(Article,on_delete=models.CASCADE)
+    CHOICES = (
+        ('STRONG ACCEPT!', 'Strong Accept'),
+        ('ACCEPT', 'Accept'),
+        ('BORDERLINE', 'Borderline'),
+        ('WEAK', 'Weak'),
+        ('REJECT', 'Reject'),
+    )
+    finall= models.CharField(max_length=500 , choices = CHOICES)
+    #reviewed = models.BooleanField( default=False)
+    
+class aboutrev(models.Model):
+    conferencee = models.ForeignKey(Conference,on_delete=models.CASCADE)
+    article = models.ForeignKey(Article,on_delete=models.CASCADE)
+    reviewingg = models.ForeignKey(reviewing,on_delete=models.CASCADE)
+    CHOICES = (
+        ('You have been selected!!!', 'You have been selected'),
+        ('You are not selected!!!', 'You are not selected '),
+    )
+    observationn = models.CharField(max_length=500,choices = CHOICES)

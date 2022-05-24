@@ -10,8 +10,8 @@ from django.contrib import messages
 from django.urls import is_valid_path
 from platformdirs import user_cache_dir
 from .forms import  RegisterForm, affecterReviewerForm
-from .forms import affecterReviewerForm ,Conferenceform, Articleform, Authorform
-from .models import Chairman, Conference, Reviewer, affectation
+from .forms import affecterReviewerForm ,Conferenceform, Articleform, Authorform, reviewingform, aboutrevForm
+from .models import Chairman, Conference, Reviewer, affectation, reviewing, aboutrev
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseNotFound
 import os
@@ -96,6 +96,27 @@ def addcon(request):
     context={'form':form,'allconf':allconf,'subbmitted':subbmitted,}
     return render(request, 'dashboard/addcon.html',context)
 
+def addreview(request,article_id, conf_id):
+    conference = Conference.objects.get(id=conf_id)
+    article = Article.objects.get(pk=article_id)
+    
+    form = reviewingform(request.POST )
+    if request.method=="POST":
+        if form.is_valid():
+            fs=form.save(commit=False)
+            aff = reviewing(globalorig= fs.globalorig,originality=fs.originality,soundness=fs.soundness,presentation=fs.presentation,relevence=fs.relevence,importance=fs.importance,observation=fs.observation,finall=fs.finall,conferencee=conference,article=article)
+            
+            aff.save()
+            
+        else:
+            form = reviewingform
+           
+    form = reviewingform
+    context={'form':form,'article':article, 'conference':conference}
+    return render(request, 'dashboard/addreview.html', context)
+
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -161,10 +182,11 @@ def about_myconfmyrev(request ,conf_id):
     myconference = Conference.objects.get(pk=conf_id)
     return render(request, 'dashboard/about_myconfmyrev.html',{'Conference':myconference})
 
-def submitedArticles(request,conf_id):
-    articles = Conference.objects.get(pk=conf_id).article.all()
-    conference = Conference.objects.get(id=conf_id)
-    return render(request, 'dashboard/submittedArticle.html', {'articles': articles,'conference':conference})
+# def submitedArticles(request,conf_id):
+#     articles = Conference.objects.get(pk=conf_id).article.all()
+#     conference = Conference.objects.get(id=conf_id)
+    
+#     return render(request, 'dashboard/submittedArticle.html', {'articles': articles,'conference':conference})
 
 def Articlesrev(request,conf_id):
     # conference = Conference.objects.get(id=conf_id)
@@ -192,7 +214,7 @@ def aboutArticle(request,article_id, conf_id):
         if form.is_valid():
             fs=form.save(commit=False)
             fs.user=request.user
-            reviewer=Reviewer.objects.get(user=fs.reviewer.user) and Reviewer.objects.get(conference=conference)
+            reviewer=Reviewer.objects.get(user=fs.reviewer.user) #and Reviewer.objects.get(conference=conference)
             # if reviewer.user != fs.reviewer.user:
             #     reviewer=Reviewer(user=fs.reviewer.user,conference=conference)
             #     reviewer.save()
@@ -202,8 +224,24 @@ def aboutArticle(request,article_id, conf_id):
             form = affecterReviewerForm
     return render(request, 'dashboard/aboutArticle.html',{'form':form,'article':article, 'conference':conference})
 
-def aboutArticlee(request,article_id, conf_id):
+def aboutreview(request,article_id, conf_id):
     conference = Conference.objects.get(id=conf_id)
+    articlee = Article.objects.get(pk=article_id)
+    rev = reviewing.objects.filter(article=articlee)
+    print(rev)
+    form = aboutrevForm(request.POST)
+
+    if request.method == "POST" :
+        if form.is_valid():
+            fs=form.save(commit=False)
+            aff = aboutrev(conferencee=conference,article=articlee,observationn=fs.observationn,reviewingg=rev)
+            aff.save()
+        else:
+            form = aboutrevForm
+    return render(request, 'dashboard/aboutreview.html',{'form':form,'article':articlee, 'conference':conference,'rev':rev})
+
+def aboutArticlee(request,article_id, conf_id):
+    conferencee = Conference.objects.get(id=conf_id)
     article = Article.objects.get(pk=article_id)
     form = affecterReviewerForm(request.POST)
 
@@ -211,23 +249,22 @@ def aboutArticlee(request,article_id, conf_id):
         if form.is_valid():
             fs=form.save(commit=False)
             fs.user=request.user
-            reviewer=Reviewer.objects.get(user=fs.reviewer.user) and Reviewer.objects.get(conference=conference)
+            reviewer=Reviewer.objects.get(user=fs.reviewer.user) and Reviewer.objects.get(conference=conferencee)
             # if reviewer.user != fs.reviewer.user:
             #     reviewer=Reviewer(user=fs.reviewer.user,conference=conference)
             #     reviewer.save()
-            aff = affectation(conferencee=conference,article=article, reviewer = reviewer)
+            aff = affectation(conferencee=conferencee,article=article, reviewer = reviewer)
             aff.save()
         else:
             form = affecterReviewerForm
-    return render(request, 'dashboard/aboutArticlee.html',{'form':form,'article':article, 'conference':conference})
+    return render(request, 'dashboard/aboutArticlee.html',{'form':form,'article':article, 'conference':conferencee})
 
 
 def submitedArticles(request,conf_id):
     articles = Conference.objects.get(pk=conf_id).article.all()
     conference = Conference.objects.get(id=conf_id)
+    #rreviewing = reviewing.objects.filter(article=articles)#article ta3 had conf
     return render(request, 'dashboard/submittedArticle.html', {'articles': articles,'conference':conference})
-
-
 
 
 def update_myconf(request, conf_id):

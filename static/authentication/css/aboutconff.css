@@ -261,3 +261,29 @@ p{
     left: 12rem;
     top: 0.25rem;
 }
+
+.form__group2{
+    position: relative;
+    left: 13rem;
+    
+    height: 4rem;
+    font-weight: bolder;
+    
+  }
+  
+  .form__label2{
+    color: #E0DDAA;
+    position: relative;
+    font-size: large;
+    left:-21rem;
+    background: #203239;
+    top: 0.25rem;
+  }
+  
+  .forl{
+    color: #E0DDAA;
+    position: relative;
+    left:2rem;
+    background: #203239;
+    top: 0.25rem;
+  }

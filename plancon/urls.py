@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('addcon/',views.addcon,name="addcon"),
+    path('addreview//<int:article_id>/<int:conf_id>/',views.addreview,name="addreview"),
     path('addarticle/<conf_id>/',views.addarticle,name="addarticle"), 
     path('', include('django.contrib.auth.urls')),
 ]
