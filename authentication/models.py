@@ -43,7 +43,7 @@ class Conference(models.Model):
     topicfour = models.CharField(max_length=500)
     pdftem = models.FileField(upload_to='documents/',default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    article=models.ManyToManyField(Article,related_name='article',blank = True)
+    article=models.ManyToManyField(Article,related_name='conferences',blank = True)
     reviewerOne = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerOne')
     reviewerTwo = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerTwo')
     reviewerThree = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='reviewerThree')

@@ -173,6 +173,32 @@ def myview(request ):
             myconferences.append(conference)
     return render(request, 'dashboard/myview.html',{'myconferences': myconferences})
 
+def myarticle(request ):
+    articlee = request.user.article_set.all()
+    #articlee = Article.objects.filter(user=request.user)
+    # print(request.user)
+    # print(articlee)
+    myconferences = [] 
+
+    for article in articlee:
+      print(article.conferences.all())
+      print("!!!!!!!!!!!!!!!!!!!!!!!")
+      print(type(article.conferences))
+      myconferences.extend(article.conferences.all())
+      clean_conferences = list(set(myconferences))
+    
+    return render(request, 'dashboard/myarticle.html',{'clean_conferences':clean_conferences})
+
+
+def myarticleschercheurs(request,conf_id):
+    article = Article.objects.all()
+    conference = Conference.objects.get(id=conf_id)
+    myarticles = []
+    for articlee in article:
+        if articlee.user == request.user:
+            myarticles.append(articlee)
+        print(myarticles)
+    return render(request, 'dashboard/myarticleschercheurs.html', {'myarticles': myarticles,'conference':conference})
 
 def about_myconf(request ,conf_id):
     myconference = Conference.objects.get(pk=conf_id)
@@ -204,6 +230,8 @@ def Articlesrev(request,conf_id):
             myarticles.append(articlee.article)
         print(myarticles)
     return render(request, 'dashboard/Articlesrev.html', {'myarticles': myarticles,'conference':conference})
+
+
 
 def aboutArticle(request,article_id, conf_id):
     conference = Conference.objects.get(id=conf_id)
@@ -244,6 +272,15 @@ def aboutreview(request,article_id, conf_id):
         else:
             form = aboutrevForm
     return render(request, 'dashboard/aboutreview.html',{'form':form,'article':articlee, 'conference':conference,'rev':rev})
+
+def aboutrevieww(request,article_id, conf_id):
+    conference = Conference.objects.get(id=conf_id)
+    articlee = Article.objects.get(pk=article_id)
+    rev = reviewing.objects.filter(article=articlee)
+    revv = aboutrev.objects.filter(article=articlee)
+    
+    return render(request, 'dashboard/aboutrevieww.html',{'revv':revv,'article':articlee, 'conference':conference,'rev':rev})
+
 
 def aboutArticlee(request,article_id, conf_id):
     conferencee = Conference.objects.get(id=conf_id)

@@ -1,0 +1,102 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+    <!-- Style.css -->
+    <title>dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/aboutconff.css' %}">
+</head>
+<body>
+         <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-mainbg">
+            <!-- Logo -->
+            <a class="navbar-brand navbar-logo" href="#"><img src="{% static 'authentication/img/Logoweb.png' %}"></a>
+            <!-- Collapse Button -->
+            
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <!-- For Styling -->
+                    <li><a href="{% url 'plancon:dashboard' %}" class="active">Dashboard</a></li>
+                    <li><a href="{% url 'plancon:addcon' %}" class="">Add Conference</a></li>
+                    <li><a href="{% url 'plancon:myConferences'  %}" class="">My Conferences</a></li>
+                    <li><a href="myart.html" class="">My articles</a></li>
+                    <li><a href="myrev.html" class="">My reviews</a></li>
+                    <li><a href="pro.html" class="">profile</a></li>
+                </ul>
+        </div> </nav>
+
+        <div class="form_group">
+            <h3>submitted in: {{ conference.name }} </h3>
+        </div>
+    
+     <div class="form_group">
+         <h3>{{ article.title }} </h3>
+     </div>
+     <div class="spacebtw"></div>
+ {% for review in rev%}
+     <div class="form_group">
+         <h4>Global Appreciation:</h4>
+         <p id="idacronym">{{ review.globalorig }} </p>
+     </div>
+ 
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4> Originality : </h4>
+       <p> 
+           {{review.originality}}
+       </p>
+    </div>
+    <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4> Soundness : </h4>
+       <p> 
+           {{review.soundness}}
+       </p>
+    </div>
+    <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>Presentation:</h4>
+         <p>{{ review.presentation }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Relevence:</h4>
+        <p>{{ review.relevence }}  </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Importance :</h4>
+      <p>{{ review.importance }}  </p>
+   </div>
+   <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Observation :</h4>
+      <p>{{ review.observation }}  </p>
+   </div>
+   <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Final :</h4>
+      <p>{{ review.finall }}  </p>
+   </div>
+   <div class="spacebtw"></div>
+   <div class='form_group'>
+    <h4>Chairman decision:</h4>
+    {% for re in revv%}
+     <p>{{ re.observationn }}  </p>
+    {% endfor%}
+    </div>
+
+ {%endfor%}
+   
+    
+    
+</body>
+</html>
