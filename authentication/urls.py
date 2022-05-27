@@ -10,6 +10,7 @@ app_name = 'plancon'
 urlpatterns = [
     path('', views.index,name='index'),
     path('dashboard',views.dashboard, name='dashboard'),
+    path('Navbar',views.Navbar, name='Navbar'),
     path('register', views.register,name='register'),
     path('myConferences', views.myConferences,name='myConferences'),
     path('addcon', views.addcon,name='addcon'),
@@ -29,6 +30,7 @@ urlpatterns = [
     path ('aboutreview/<int:article_id>/<int:conf_id>/', views.aboutreview,name='aboutreview'),
     path ('aboutrevieww/<int:article_id>/<int:conf_id>/', views.aboutrevieww,name='aboutrevieww'),
     path ('aboutArticlee/<int:article_id>/<int:conf_id>/', views.aboutArticlee,name='aboutArticlee'),
+    path ('aboutArticleee/<int:article_id>/<int:conf_id>/', views.aboutArticleee,name='aboutArticleee'),
     path('reset_password/',auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html') , name='reset_password'),
     path('submitedConfArticles/<int:conf_id>/', views.submitedArticles,name='submitedArticles'),
     path ('aboutArticle/<int:article_id>/<int:conf_id>/', views.aboutArticle,name='aboutArticle'),

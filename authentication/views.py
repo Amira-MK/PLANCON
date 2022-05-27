@@ -26,6 +26,9 @@ from django.http import FileResponse
 def index(request):
     return render(request, 'dashboard/index.html')
 
+def Navbar(request):
+    return render(request, 'dashboard/Navbar.html')
+
 def dashboard(request):
     conferences = Conference.objects.all()
     notmyconferences = []
@@ -301,6 +304,25 @@ def aboutArticlee(request,article_id, conf_id):
             form = affecterReviewerForm
     return render(request, 'dashboard/aboutArticlee.html',{'form':form,'article':article, 'conference':conferencee})
 
+
+def aboutArticleee(request,article_id, conf_id):
+    conferencee = Conference.objects.get(id=conf_id)
+    article = Article.objects.get(pk=article_id)
+    form = affecterReviewerForm(request.POST)
+
+    if request.method == "POST" :
+        if form.is_valid():
+            fs=form.save(commit=False)
+            fs.user=request.user
+            reviewer=Reviewer.objects.get(user=fs.reviewer.user) and Reviewer.objects.get(conference=conferencee)
+            # if reviewer.user != fs.reviewer.user:
+            #     reviewer=Reviewer(user=fs.reviewer.user,conference=conference)
+            #     reviewer.save()
+            aff = affectation(conferencee=conferencee,article=article, reviewer = reviewer)
+            aff.save()
+        else:
+            form = affecterReviewerForm
+    return render(request, 'dashboard/aboutArticleee.html',{'form':form,'article':article, 'conference':conferencee})
 
 def submitedArticles(request,conf_id):
     articles = Conference.objects.get(pk=conf_id).article.all()

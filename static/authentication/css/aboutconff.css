@@ -1,43 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: #203239;
-    
-	
     /* fallback for old browsers */
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+i {
+    margin-right: 10px;
 }
 
 .navbar-logo {
-    width: 20%;
-    height: 30%;
-    margin-left:2% ;
+    width: 17%;
+    height: 17%;
+    margin-left: 2%;
     color: #000000;
 }
-.navbar-logo img{
-   width: 20%;
-   height: 30%;
-}
 
-#link {
-    overflow: hidden;
-    position: relative;
-  
+.navbar-logo img {
+    width: 20%;
+    height: 30%;
 }
 
 .navbar-mainbg {
     background-color: #EEEDDE;
     padding: 0px;
 }
+
+#navbarSupportedContent {
+    overflow: hidden;
+    position: relative;
+}
+
 #navbarSupportedContent ul {
     padding: 0px;
     margin: 0px;
+}
+
+#navbarSupportedContent ul li a i {
+    margin-right: 10px;
 }
 
 #navbarSupportedContent li {
@@ -45,34 +50,16 @@ body {
     float: left;
 }
 
-#navbarSupportedContent ul li a{
+#navbarSupportedContent ul li a {
     color: #203239;
     text-decoration: none;
     font-size: 15px;
-    font-weight: bolder;
     display: block;
     padding: 20px 20px;
     transition-duration: 0.6s;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     position: relative;
 }
-
-
-#navbarSupportedContent ul li a:hover {
-    color: #EEEDDE;
-    background-color: #203239;
-    border-radius: 5% ;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: bolder;
-    display: block;
-    padding: 20px 20px;
-    transition-duration: 0.6s;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    position: relative;
-}
-
-
 
 #navbarSupportedContent>ul>li.active>a {
     color: #EEEDDE;
@@ -80,6 +67,23 @@ body {
     transition: all 0.7s;
 }
 
+#navbarSupportedContent a:not(:only-child):after {
+    content: '\f105';
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 14px;
+    font-family: 'Font Awesome 5 Free';
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    transition: 0.5s;
+}
+
+#navbarSupportedContent .active>a:not(:only-child):after {
+    transform: rotate(90deg);
+}
 
 .hori-selector {
     display: inline-block;
@@ -162,8 +166,14 @@ body {
         bottom: -25px;
         left: -25px;
     }
+    .logoimg {
+        position: absolute;
+        width: 7%;
+        height: 7%;
+        left: 2%;
+        top: 1%;
+    }
 }
-
 .form_group{
     width: 80%;
     position: relative;
@@ -199,7 +209,7 @@ h3{
 }
 
 h4{ 
-    color: #EEEDDE;
+    color: #E0DDAA;
     font-weight: 200;
     position: relative;
     left: 4rem;

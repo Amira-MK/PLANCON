@@ -1,25 +1,21 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
     <!-- Style.css -->
     <title>dashboard</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/Nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/aboutconff.css' %}">
 </head>
 <body>
-    {% if user.is_authenticated %}
          <!-- Navbar -->
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-mainbg">
+         <nav class="navbar navbar-expand-lg navbar-mainbg">
             <!-- Logo -->
     
             <a class="navbar-brand navbar-logo" href="#"><img src="{% static 'authentication/img/logoweb.png' %}"></a>
@@ -49,16 +45,16 @@
                       </i>Add conference
                         </a>
                     </li>
-                    <li class="nav-item  active">
+                    <li class="nav-item  ">
                         <a class="nav-link" href="{% url 'plancon:myConferences' %}">
                             <i class="bi bi-person-lines-fill">
                       </i>My Conference
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'plancon:myarticle' %}">
                             <i class="bi bi-files">
-                      </i>My articles
+                      </i>My Articles
                         </a>
                     </li>
                     <li class="nav-item ">
@@ -67,6 +63,7 @@
                       </i>My Reviews
                         </a>
                     </li>
+                   
                     <li class="nav-item ">
                         <a class="nav-link" href="#bi-bell-fil">
                             <i class="bi bi-bell-fill">
@@ -89,57 +86,61 @@
     
     
             </nav>
-        <!--here i wanted to show the name of the conf and it is not working HELP-->
-        <h1>{{ Conference.name }}'s articles</h1>
 
-    {% for article in articles%}
-         
-          <div class="form_group">
-
-            <p>
-                <a class="signup" href="{% url 'plancon:aboutArticle' article.pk conference.id %}" id="iclicked" >
-                    {{ article.title }}
-                </a>
-                
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                {{ article.domaine }}
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                {{ article.sous_domaine }}
-                &nbsp; &nbsp; &nbsp;
-                {{ article.keywords }}
-                Click here to see the article
-                <!--?????????????????????????????????????????-->
-                {% comment %} {% if rreviewing.article%}
-                    {% if rreviewing.reviewed %}
-                        reviewed    
-                    {% endif %}
-                {% endif %} {% endcomment %}
-                {% comment %} {{rreviewing.reviewed}} {% endcomment %}
-                 {% comment %} {% if rreviewing.reviewed  %}
-                   <p>REVIEWED</p>
-                 {% endif %} {% endcomment %}
-                 &nbsp; &nbsp; &nbsp;
-                 &nbsp; &nbsp; &nbsp;
-                 &nbsp; &nbsp; &nbsp;
-                 <a class="signup1" href="{% url 'plancon:aboutreview' article.pk conference.id %}" id="iclicked" >
-                    View Reviewing Results
-                </a>
-            </p>
+        <div class="form_group">
+            <h3>submitted in: {{ conference.name }} </h3>
         </div>
-        <div class="spacebtw"></div>
-    {% endfor %}
-        
-        
-    {% else %}
-    <h1>NO</h1>
-    <button type='submit'><a href='/login'>login</a></button>
-    <button type='submit'><a href='/register'>register</a></button>
-    <a href='/'>index</a>
-    {% endif %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <!--<script src="Nav.js"></script>-->
-    <script src="{% static 'authentication/js/Navbar.js' %}"></script>
+    
+     <div class="form_group">
+         <h3>{{ article.title }} </h3>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>Abstract:</h4>
+         <p id="idacronym">{{ article.abstract }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4> Domain : </h4>
+       <p> 
+           {{article.domaine}}
+       </p>
+    </div>
+    <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4> Sub Domain : </h4>
+       <p> 
+           {{article.sous_domaine}}
+       </p>
+    </div>
+    <div class="spacebtw"></div>
+     <div class="form_group">
+         <h4>keywords:</h4>
+         <p>{{ article.keywords }} </p>
+     </div>
+     <div class="spacebtw"></div>
+     <div class="form_group">
+        <h4>Author:</h4>
+        <p>{{ article.user.username }}  </p>
+     </div>
 
+
+     <div class="spacebtw"></div>
+     <div class="form_group">
+      <h4>Paper :</h4>
+      <a class="template" href="{{ article.file.url }}">Click here to download the paper</a>
+      
+   </div>
+   <div class="spacebtw"></div>
+   <div class='form_group'>
+        
+  
+
+</div>
+   
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+   <!--<script src="Nav.js"></script>-->
+   <script src="{% static 'authentication/js/Navbar.js' %}"></script>
 </body>
 </html>
