@@ -19,6 +19,7 @@ from .models import Article
 from .models import Author
 from . import models
 from django.http import FileResponse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -30,7 +31,13 @@ def Navbar(request):
     return render(request, 'dashboard/Navbar.html')
 
 def dashboard(request):
-    conferences = Conference.objects.all()
+    if 'q' in request.GET:
+        q = request.GET['q']
+        # data = Data.objects.filter(last_name__icontains=q)
+        multiple_q = Q(Q(name__icontains=q) | Q(topicone__icontains=q))
+        conferences = Conference.objects.filter(multiple_q)
+    else:
+        conferences = Conference.objects.all()
     notmyconferences = []
     for conference in conferences:
         if conference.user != request.user:

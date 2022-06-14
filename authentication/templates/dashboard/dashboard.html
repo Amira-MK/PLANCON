@@ -90,9 +90,14 @@
     
     
         </nav>
-      
-        <h2>Conferences</h2>
+       <h2>Upcoming Conferences</h2>
         <p>hello {{user.username}}</p>
+ 
+        
+        <form class="search__container" >
+            <input class="search__input" name="q" type="search" placeholder="Search" aria-label="Search">
+            
+         </form>
 
         <form action="{% url 'plancon:logout' %}" methode="post">
             {% csrf_token%}

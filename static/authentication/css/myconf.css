@@ -1,10 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: #203239;
-    
-	
     /* fallback for old browsers */
 }
 
@@ -200,7 +197,7 @@ i {
 
 .rev__button2{
     width: 20%;
-    left: 23rem;
+    left: 24rem;
     position: relative;
     /* padding: 0.75rem 2rem; */
     background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
@@ -218,7 +215,7 @@ i {
 
 .rev__button3{
     width: 20%;
-    left: 35rem;
+    left: 36rem;
     position: relative;
     /* padding: 0.75rem 2rem; */
     background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
