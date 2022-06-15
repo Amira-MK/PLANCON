@@ -10,6 +10,7 @@ app_name = 'plancon'
 urlpatterns = [
     path('', views.index,name='index'),
     path('dashboard',views.dashboard, name='dashboard'),
+    path('profil',views.profil, name='profil'),
     path('Navbar',views.Navbar, name='Navbar'),
     path('register', views.register,name='register'),
     path('myConferences', views.myConferences,name='myConferences'),

@@ -38,7 +38,7 @@
                         <div class="right"></div>
                     </div>
                     <!-- Nav Links -->
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="{% url 'plancon:dashboard' %}">
                             <i class="fas fa-tachometer-alt">
                       </i>Dashboard
@@ -74,8 +74,8 @@
                       </i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'plancon:profil' %}">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#fa-user-circle">
                             <i class="fas fa-user-circle">
                           </i>
                         </a>
@@ -90,32 +90,34 @@
     
     
         </nav>
-       <h2>Upcoming Conferences</h2>
-      
- 
-        
-        <form class="search__container" >
-            <input class="search__input" name="q" type="search" placeholder="Search" aria-label="Search">
-            
-         </form>
-
-        <div><p style={color:#203239;}>some space cz css not working</p></div>
+        <h2>MY PROFIL INFORMATION</h2>
+        <form class="info">
+         <p>Username:  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;{{user.username}}</p>
+        </form>
+        <form class="info">
+            <p>First name: &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;{{user.first_name}}</p>
+        </form>        
+        <form class="info">
+            <p>Last name:&nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;{{user.last_name}}</p>
+        </form>    
+        <form class="info">
+            <p>Email: &nbsp; &nbsp; &nbsp;  &nbsp; {{user.email}}</p>
+        </form>  
+        <form action="{% url 'plancon:logout' %}" methode="post">
+            {% csrf_token%}
+            <button class="form__button" type="submit"> logout </button>
+        </form>
+        <form >
+            {% csrf_token%}
+            <button class="form__button1" type="submit"> Edit </button>
+        </form>
     {% else %}
     <h1>NO</h1>
     <button type='submit'><a href='/login'>login</a></button>
     <button type='submit'><a href='/register'>register</a></button>
     <a href='/'>index</a>
     {% endif %}
-    {% for Conference in notmyconferences%}
-     <div class="form_group">
-      <p><a class="signup" href="{% url 'plancon:aboutconf' Conference.pk %}" id="iclicked" >{{ Conference.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-          {{ Conference.name }}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-          {{ Conference.startdate }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          Click here to read more and add your article --> </p>
-     </div>
-     <div class="spacebtw"></div>
-    {% endfor %}
-
+   
     
      <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

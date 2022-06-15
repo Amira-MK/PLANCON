@@ -30,6 +30,10 @@ def index(request):
 def Navbar(request):
     return render(request, 'dashboard/Navbar.html')
 
+def profil(request):
+  
+    return render(request, 'dashboard/profil.html')
+
 def dashboard(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -351,3 +355,4 @@ def delete_myconf(request, conf_id):
     myconference = Conference.objects.get(pk=conf_id)
     myconference.delete()
     return redirect('plancon:myConferences')
+

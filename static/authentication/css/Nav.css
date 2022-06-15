@@ -262,7 +262,7 @@ h2{
 }
 */
 .search__container {
-    
+        
         width: 30%;
         position: relative;
         left: 60%;
@@ -308,3 +308,60 @@ h2{
             border-radius: 0;
             background-position: 100% center;
         }
+
+.info{
+    position: relative;
+    top: 40pt;
+    left:40%;
+    background-color: transparent;
+    color: #E0DDAA;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    border-radius: 10%;
+    width: 30%;
+    border: 2px solid rgba(238, 237, 222, 1);
+    border-radius: 1rem;
+    font-family: inherit;
+    font-weight: inherit;
+    color: #E0DDAA;
+    outline: none;
+    margin-bottom: 2%;
+    background: rgba(32, 50, 57, 1);  
+
+}
+
+.form__button{
+    
+        width: 10%;
+        position: relative;
+        left: 31rem;
+        padding: 0.75rem 2rem;
+        background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
+        top: 3rem;
+        border-radius: 5rem;
+        outline: none;
+        border: none;
+        text-transform: uppercase;
+          display: block;
+        cursor: pointer;
+          transition: .5s;
+   
+}
+
+.form__button1{
+    
+    width: 10%;
+    position: relative;
+    left: 47rem;
+    padding: 0.75rem 2rem;
+    background-image: linear-gradient(to right, #E0DDAA, rgba(238, 237, 222, 1), #E0DDAA);
+    
+    border-radius: 5rem;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+      display: block;
+    cursor: pointer;
+      transition: .5s;
+
+}
