@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from cProfile import Profile
 from multiprocessing import context
 from re import template
@@ -51,8 +52,9 @@ def dashboard(request):
 
 def aboutconf(request ,conf_id):
     myconference = Conference.objects.get(pk=conf_id)
+    conferences = Conference.objects.all()
     filepath = os.path.join('static', 'sample.pdf')
-    return render(request, 'dashboard/aboutconf.html',{'Conference':myconference})
+    return render(request, 'dashboard/aboutconf.html',{'Conference':myconference,'conferences':conferences})
 
    
 
@@ -193,25 +195,28 @@ def myarticle(request ):
     # print(request.user)
     # print(articlee)
     myconferences = [] 
-
-    for article in articlee:
-      print(article.conferences.all())
-      print("!!!!!!!!!!!!!!!!!!!!!!!")
-      print(type(article.conferences))
-      myconferences.extend(article.conferences.all())
-      clean_conferences = list(set(myconferences))
-    
+    if articlee :
+        for article in articlee:
+            print(article.conferences.all())
+            print("!!!!!!!!!!!!!!!!!!!!!!!")
+            print(type(article.conferences))
+            myconferences.extend(article.conferences.all())
+            clean_conferences = list(set(myconferences))
+    else:
+        clean_conferences= NULL
     return render(request, 'dashboard/myarticle.html',{'clean_conferences':clean_conferences})
 
 
 def myarticleschercheurs(request,conf_id):
     article = Article.objects.all()
     conference = Conference.objects.get(id=conf_id)
+    art = conference.article.all()
     myarticles = []
-    for articlee in article:
-        if articlee.user == request.user:
-            myarticles.append(articlee)
-        print(myarticles)
+    for artt in art:
+        for articlee in article:
+            if articlee.user == request.user and artt==articlee  :
+                myarticles.append(articlee)
+         
     return render(request, 'dashboard/myarticleschercheurs.html', {'myarticles': myarticles,'conference':conference})
 
 def about_myconf(request ,conf_id):

@@ -93,20 +93,22 @@
             </nav>
 
         <h2>I'm a resercher in conference:</h2>
+        {%if clean_conferences%}
+            {% for conf in clean_conferences%}
+            <div class="conf_form_group">
+                <p><a class="signup" href="{% url 'plancon:about_myconfmyrev' conf.pk %}" id="iclicked" >{{ conf.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                {{ conf.name }}  
+                
+                </p>
+                <!--add Button-->
+                <button type="button" class='rev__button' >
+                    <a href="{% url 'plancon:myarticleschercheurs' conf.pk %}" class="txt">Your Article In This Conference </a>
+                </button>
+            </div>
+            <div class="spacebtw"></div>
+            {% endfor %}
 
-        {% for conf in clean_conferences%}
-        <div class="conf_form_group">
-            <p><a class="signup" href="{% url 'plancon:about_myconfmyrev' conf.pk %}" id="iclicked" >{{ conf.acronym }}</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-             {{ conf.name }}  
-            
-             </p>
-            <!--add Button-->
-            <button type="button" class='rev__button' >
-                <a href="{% url 'plancon:myarticleschercheurs' conf.pk %}" class="txt">Your Article In This Conference </a>
-            </button>
-        </div>
-        <div class="spacebtw"></div>
-       {% endfor %}
+        {% endif %}
 
 
     {% else %}
