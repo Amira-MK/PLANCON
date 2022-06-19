@@ -208,6 +208,28 @@ h3{
     top: 1rem;
 }
 
+table{
+    color: #E0DDAA;
+    border: 2px solid rgba(238, 237, 222, 1);
+    border-radius: 1rem;
+    font-size: medium;
+    font-style: normal;
+    width: 70%;
+    height: 5rem;
+    position: relative;
+    left: 12rem;
+    text-align: center  ;
+}
+
+h5{
+    color: #E0DDAA;
+    font-weight: 100;
+    position: relative;
+    left: 13rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
 h4{ 
     color: #E0DDAA;
     font-weight: 200;

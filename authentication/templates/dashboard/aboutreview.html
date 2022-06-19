@@ -99,50 +99,30 @@
      </div>
      <div class="spacebtw"></div>
  {% for review in rev%}
-     <div class="form_group">
-         <h4>Global Appreciation:</h4>
-         <p id="idacronym">{{ review.globalorig }} </p>
-     </div>
- 
-     <div class="spacebtw"></div>
-     <div class="form_group">
-        <h4> Originality : </h4>
-       <p> 
-           {{review.originality}}
-       </p>
-    </div>
-    <div class="spacebtw"></div>
-     <div class="form_group">
-        <h4> Soundness : </h4>
-       <p> 
-           {{review.soundness}}
-       </p>
-    </div>
-    <div class="spacebtw"></div>
-     <div class="form_group">
-         <h4>Presentation:</h4>
-         <p>{{ review.presentation }} </p>
-     </div>
-     <div class="spacebtw"></div>
-     <div class="form_group">
-        <h4>Relevence:</h4>
-        <p>{{ review.relevence }}  </p>
-     </div>
-     <div class="spacebtw"></div>
-     <div class="form_group">
-      <h4>Importance :</h4>
-      <p>{{ review.importance }}  </p>
-   </div>
-   <div class="spacebtw"></div>
-     <div class="form_group">
-      <h4>Observation :</h4>
-      <p>{{ review.observation }}  </p>
-   </div>
-   <div class="spacebtw"></div>
-     <div class="form_group">
-      <h4>Final :</h4>
-      <p>{{ review.finall }}  </p>
-   </div>
+  <h5>Reviewer: &nbsp; &nbsp;{{review.user}}</h3>
+ <table border="1">
+    <tr>
+        <th>Global Appreciation</th>
+        <th>Originality</th>
+        <th>Soundness</th>
+        <th>Presentation</th>
+        <th>Relevence</th>
+        <th>Importance</th>
+        <th>Observation</th>
+        <th>Final </th>
+    </tr>
+    <tr>
+        <td>{{ review.globalorig }}</td>
+        <td>{{ review.originality }}</td>
+        <td>{{ review.soundness}}</td>
+        <td>{{ review.presentation }}</td>
+        <td>{{ review.relevence  }}</td>
+        <td>{{ review.importance }}</td>
+        <td>{{ review.observation }}</td>
+        <td>{{ review.finall }}</td>
+    </tr>
+</table>
+    
  {%endfor%}
    <div class="spacebtw"></div>
    <div class='form_group'>

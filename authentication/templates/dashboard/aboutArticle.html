@@ -135,17 +135,14 @@
    
    <div class='form_group'>
         <h4>affecter articles:</h4>
-        <form action="{% url 'plancon:aboutArticle' article.pk conference.id %}" method="POST">
-            <input type="hidden" name="article_id" value="{{ article.pk }}">
-            <input type="hidden" name="conference_id" value="{{ conference.id }}">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        
             
-                
-                {% render_field form.reviewer %}
+{% comment %}                 
+                {% render_field form.reviewer %} {% endcomment %}
                
             
             <button type="submit" class="form__button">Affecter</button>
-        </form>
+        
 
    </div>
   

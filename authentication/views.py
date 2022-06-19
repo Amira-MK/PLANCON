@@ -1,5 +1,7 @@
 from asyncio.windows_events import NULL
 from cProfile import Profile
+from datetime import date
+import datetime
 from multiprocessing import context
 from re import template
 from urllib.request import Request
@@ -43,12 +45,29 @@ def dashboard(request):
         conferences = Conference.objects.filter(multiple_q)
     else:
         conferences = Conference.objects.all()
+    now = date.today()
     notmyconferences = []
     for conference in conferences:
         if conference.user != request.user:
-            notmyconferences.append(conference)
+            # notmyconferences.append(conference)
+            if  conference.startdate > now or conference.soumissiondeadline > now:
+                notmyconferences.append(conference)
     #Conferences = Conference.objects.all()
     return render(request, 'dashboard/dashboard.html',{'notmyconferences':notmyconferences})
+
+    # def dashboard(request):
+    # conferences = Conference.objects.all()
+    # notmyconferences = []
+    # now = date.today()
+    # for conference in conferences:
+    #     if conference.user != request.user:
+    #          if conference.soumissiondeadline > now:
+    #             notmyconferences.append(conference)
+
+    # #Conferences = Conference.objects.all()
+    # return render(request, 'dashboard/dashboard.html',{'notmyconferences':notmyconferences})
+
+
 
 def aboutconf(request ,conf_id):
     myconference = Conference.objects.get(pk=conf_id)
@@ -120,7 +139,7 @@ def addreview(request,article_id, conf_id):
     if request.method=="POST":
         if form.is_valid():
             fs=form.save(commit=False)
-            aff = reviewing(globalorig= fs.globalorig,originality=fs.originality,soundness=fs.soundness,presentation=fs.presentation,relevence=fs.relevence,importance=fs.importance,observation=fs.observation,finall=fs.finall,conferencee=conference,article=article)
+            aff = reviewing(globalorig= fs.globalorig,originality=fs.originality,soundness=fs.soundness,presentation=fs.presentation,relevence=fs.relevence,importance=fs.importance,observation=fs.observation,finall=fs.finall,conferencee=conference,article=article, user= request.user)
             
             aff.save()
             
@@ -245,7 +264,7 @@ def Articlesrev(request,conf_id):
     conference = Conference.objects.get(id=conf_id)
     myarticles = []
     for articlee in affs:
-        if articlee.reviewer.user == request.user and articlee.conferencee == conference:
+        if articlee.reviewer == request.user and articlee.conferencee == conference:
             myarticles.append(articlee.article)
         print(myarticles)
     return render(request, 'dashboard/Articlesrev.html', {'myarticles': myarticles,'conference':conference})
@@ -255,26 +274,37 @@ def Articlesrev(request,conf_id):
 def aboutArticle(request,article_id, conf_id):
     conference = Conference.objects.get(id=conf_id)
     article = Article.objects.get(pk=article_id)
-    form = affecterReviewerForm(request.POST)
-
-    if request.method == "POST" :
-        if form.is_valid():
-            fs=form.save(commit=False)
-            fs.user=request.user
-            reviewer=Reviewer.objects.get(user=fs.reviewer.user) #and Reviewer.objects.get(conference=conference)
-            # if reviewer.user != fs.reviewer.user:
-            #     reviewer=Reviewer(user=fs.reviewer.user,conference=conference)
-            #     reviewer.save()
-            aff = affectation(conferencee=conference,article=article, reviewer = reviewer)
-            aff.save()
-        else:
-            form = affecterReviewerForm
-    return render(request, 'dashboard/aboutArticle.html',{'form':form,'article':article, 'conference':conference})
+    reviewer1 = conference.reviewerOne 
+    aff1 = affectation(conferencee=conference,article=article, reviewer = reviewer1)
+    aff1.save()
+    reviewer1 = conference.reviewerTwo 
+    aff1 = affectation(conferencee=conference,article=article, reviewer = reviewer1)
+    aff1.save()
+    reviewer1 = conference.reviewerThree 
+    aff1= affectation(conferencee=conference,article=article, reviewer = reviewer1)
+    aff1.save()
+    
+    print("########")
+            # form = affecterReviewerForm(request.POST)
+    # if request.method == "POST" :
+    #     if form.is_valid():
+    #         fs=form.save(commit=False)
+    #         fs.user=request.user
+    #         reviewer=Reviewer.objects.get(user=fs.reviewer.user) #and Reviewer.objects.get(conference=conference)
+    #         # if reviewer.user != fs.reviewer.user:
+    #         #     reviewer=Reviewer(user=fs.reviewer.user,conference=conference)
+    #         #     reviewer.save()
+    #         aff = affectation(conferencee=conference,article=article, reviewer = reviewer)
+    #         aff.save()
+    #     else:
+    #         form = affecterReviewerForm
+    return render(request, 'dashboard/aboutArticle.html',{'article':article, 'conference':conference})
 
 def aboutreview(request,article_id, conf_id):
     conference = Conference.objects.get(id=conf_id)
     articlee = Article.objects.get(pk=article_id)
     rev = reviewing.objects.filter(article=articlee)
+    
     revi = reviewing.objects.all()
     print(rev)
     print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -283,8 +313,10 @@ def aboutreview(request,article_id, conf_id):
     if request.method == "POST" :
         if form.is_valid():
             fs=form.save(commit=False)
+            
             rrr = []
             for revs in rev:
+                # revs.user = request.user
                 rrr.append(revs)
                 aff = aboutrev(conferencee= conference,article=articlee,reviewingg=revs,observationn=fs.observationn )
             aff.save()

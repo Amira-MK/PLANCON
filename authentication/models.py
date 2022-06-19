@@ -91,7 +91,7 @@ class Reviewer(models.Model):
 class affectation(models.Model):
     conferencee = models.ForeignKey(Conference,on_delete=models.CASCADE)
     article = models.ForeignKey(Article,on_delete=models.CASCADE)
-    reviewer = models.ForeignKey(Reviewer,on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(User,on_delete=models.CASCADE)
 
 
 
@@ -113,6 +113,7 @@ class reviewing(models.Model):
         ('REJECT', 'Reject'),
     )
     finall= models.CharField(max_length=500 , choices = CHOICES)
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     #reviewed = models.BooleanField( default=False)
     
 class aboutrev(models.Model):
